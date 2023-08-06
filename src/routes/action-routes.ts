@@ -1,8 +1,9 @@
 import { Router } from 'express';
+import { addAction } from '../controllers/action-controllers';
 
 const router = Router();
 
-router.post('/new', () => console.log('pizzza'));
-router.get('/all', ()=>console.log('get ingredient'));
+router.post('/new', addAction);
+
 
 export default router

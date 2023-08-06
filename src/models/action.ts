@@ -1,9 +1,9 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 interface IAction {
     name: string;
-    ingredients?: string[];
-    pizzas?: string[];
+    ingredients?: Types.ObjectId[];
+    pizzas?: Types.ObjectId[];
 }
 
 const actionSchema = new Schema<IAction>({
