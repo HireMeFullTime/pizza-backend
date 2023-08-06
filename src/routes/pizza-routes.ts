@@ -1,8 +1,8 @@
 import { Router } from 'express';
+import { addPizza } from '../controllers/pizza-controllers';
 
 const router = Router();
 
-router.post('/new', () => console.log('pizzza'));
-router.get('/all', ()=>console.log('get pizza'));
+router.post('/new', addPizza);
 
 export default router

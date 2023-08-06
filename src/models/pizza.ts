@@ -1,9 +1,9 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 interface IPizza {
     name: string;
-    ingredients: string[];
-    actions: string[];
+    ingredients: Types.ObjectId[];
+    actions: Types.ObjectId[];
 }
 
 const pizzaSchema = new Schema<IPizza>({
