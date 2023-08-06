@@ -1,8 +1,9 @@
 import { Router } from 'express';
+import { addIngredient } from '../controllers/ingredient-controllers';
 
 const router = Router();
 
-router.post('/new', () => console.log('pizzza'));
-router.get('/all', (_req, res)=> res.status(200).json({ success: true, message: 'See you soon! :)' }));
+router.post('/new', addIngredient);
+
 
 export default router
