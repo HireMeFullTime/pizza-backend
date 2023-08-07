@@ -3,11 +3,22 @@ import { Pizza } from "../models/pizza";
 import { Action } from "../models/action";
 import { Ingredient } from "../models/ingredient";
 
+
 export const addPizza = async (req: Request, res: Response) => {
     try {
         const { name, actions, ingredients } = req.body;
         const pizzaExist = await Pizza.findOne({ name });
+        const ingredientExist = await Ingredient.find({ _id: { $in: ingredients } });
+        const missingIngredients = ingredients.filter((id: string) => !ingredientExist.some(ingredient => ingredient._id.toString() === id));
+        if (missingIngredients.length > 0) {
+            return res.status(404).json({ success: false, message: 'Ingredient not found.', });
+        }
 
+        const actionsExist = await Action.find({ _id: { $in: actions } });
+        const missingActions = actions.filter((id: string) => !actionsExist.some(action => action._id.toString() === id));
+        if (missingActions.length > 0) {
+            return res.status(404).json({ success: false, message: 'Action not found.', missingActions });
+        }
         if (pizzaExist) {
             return res.status(400).json({ message: 'Pizza exists already' });
         }
@@ -22,6 +33,7 @@ export const addPizza = async (req: Request, res: Response) => {
                 ingredient.pizzas.push(newPizza._id);
                 await ingredient.save();
             }
+
         }
 
         for (const action of actionsToLink) {
