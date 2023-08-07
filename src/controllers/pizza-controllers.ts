@@ -51,12 +51,24 @@ export const addPizza = async (req: Request, res: Response) => {
 }
 
 export const getPizzaDetails = async (req: Request, res: Response) => {
-    const pizzaName = req.params.pizzaName
-    const pizzaExist = await Pizza.findOne({ name: pizzaName })
-        .populate("ingredients", "name -_id")
-        .populate("actions", "name -_id");
+    const pizzaName = req.params.pizzaName;
 
-    res.status(200).json({ ingredients: pizzaExist?.ingredients, actions: pizzaExist?.actions });
+    try {
+        const pizzaExist = await Pizza.findOne({ name: pizzaName })
+            .populate("ingredients", "name -_id")
+            .populate("actions", "name -_id");
+
+        if (!pizzaExist) {
+            return res.status(404).json({ success: false, message: "Pizza not found." })
+        }
+        res.status(200).json({ ingredients: pizzaExist?.ingredients, actions: pizzaExist?.actions });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Something went wrong. Please try again later.',
+        });
+    }
+
 }
 
 export const patchPizzaName = async (req: Request, res: Response) => {
