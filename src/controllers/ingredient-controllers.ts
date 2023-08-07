@@ -9,11 +9,14 @@ export const addIngredient = async (req: Request, res: Response) => {
     try {
         const { name, action } = req.body;
         const ingredientExist = await Ingredient.findOne({ name });
-
+        const actionExist = await Action.findOne({ _id: action })
         if (ingredientExist) {
             return res.status(400).json({ message: 'Ingredient exists already' });
         }
 
+        if (!actionExist) {
+            return res.status(404).json({ success: false, message: 'action not found.' });
+        }
         const newIngredient = new Ingredient({ name, action });
         const actionsToLink = await Action.find({ _id: { $in: action } });
 
