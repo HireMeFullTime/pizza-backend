@@ -56,7 +56,7 @@ export const getIngredientDetails = async (req: Request, res: Response) => {
         if (!ingredientExist) {
             return res.status(404).json({ success: false, message: "Ingredient not found." })
         }
-        res.status(200).json({ pizzas: ingredientExist?.pizzas, action: ingredientExist?.action });
+        res.status(200).json({ name: ingredientExist.name, pizzas: ingredientExist?.pizzas, action: ingredientExist?.action });
 
     } catch (error) {
         res.status(500).json({
