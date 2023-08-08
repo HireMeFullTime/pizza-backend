@@ -34,6 +34,16 @@ export const addIngredient = async (req: Request, res: Response) => {
     }
 }
 
+export const getAllIngredientsNames = async (req: Request, res: Response) => {
+    try {
+        const ingredientName = await Ingredient.find().select('name -_id')
+
+        res.status(200).json({ ingredients: ingredientName })
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Something went wrong. Please, try again later.' });
+    }
+}
+
 export const getIngredientDetails = async (req: Request, res: Response) => {
     const ingredientName = req.params.ingredientName
 

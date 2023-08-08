@@ -50,6 +50,16 @@ export const addPizza = async (req: Request, res: Response) => {
     }
 }
 
+export const getAllPizzasNames = async (req: Request, res: Response) => {
+    try {
+        const pizzaName = await Pizza.find().select('name -_id')
+
+        res.status(200).json({ pizzas: pizzaName })
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Something went wrong. Please, try again later.' });
+    }
+}
+
 export const getPizzaDetails = async (req: Request, res: Response) => {
     const pizzaName = req.params.pizzaName;
 

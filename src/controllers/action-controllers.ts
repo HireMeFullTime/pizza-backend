@@ -21,6 +21,16 @@ export const addAction = async (req: Request, res: Response) => {
     }
 }
 
+export const getAllActionsNames = async (req: Request, res: Response) => {
+    try {
+        const actionName = await Action.find().select('name -_id')
+
+        res.status(200).json({ actions: actionName })
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Something went wrong. Please, try again later.' });
+    }
+}
+
 export const getActionDetails = async (req: Request, res: Response) => {
     const actionName = req.params.actionName;
     try {
