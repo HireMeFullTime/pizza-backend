@@ -66,12 +66,12 @@ export const getPizzaDetails = async (req: Request, res: Response) => {
     try {
         const pizzaExist = await Pizza.findOne({ name: pizzaName })
             .populate("ingredients", "name -_id")
-            .populate("actions", "name -_id");
+            .populate("actions", "name -_id")
 
         if (!pizzaExist) {
             return res.status(404).json({ success: false, message: "Pizza not found." })
         }
-        res.status(200).json({ ingredients: pizzaExist?.ingredients, actions: pizzaExist?.actions });
+        res.status(200).json({ name: pizzaExist.name, ingredients: pizzaExist?.ingredients, actions: pizzaExist?.actions });
     } catch (error) {
         res.status(500).json({
             success: false,
