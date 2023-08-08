@@ -42,7 +42,7 @@ export const getActionDetails = async (req: Request, res: Response) => {
         if (!actionExist) {
             return res.status(404).json({ success: false, message: "Action not found." })
         }
-        res.status(200).json({ pizzas: actionExist?.pizzas, ingredients: actionExist?.ingredients });
+        res.status(200).json({ name: actionExist.name, pizzas: actionExist?.pizzas, ingredients: actionExist?.ingredients });
 
     } catch (error) {
         res.status(500).json({
