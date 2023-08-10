@@ -34,7 +34,7 @@ app.use('/ingredient', ingredientRoutes)
 app.use('/action', actionRoutes)
 
 app.get('/', (_req, res) => {
-  res.send('Welcome on my space-backend part');
+  res.send('Welcome on my pizza-backend part 🍕🍕🍕');
 });
 mongoose
   .connect(`${process.env.MONGO_URI}`)
