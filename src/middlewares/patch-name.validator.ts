@@ -5,7 +5,7 @@ const validation = Joi.object({
  name: Joi.string().min(2).trim(true).required(),
 });
 
-export const patchNameIngredientValidation = async (
+export const patchNameValidation = async (
   req: Request,
   res: Response,
   next: NextFunction,
