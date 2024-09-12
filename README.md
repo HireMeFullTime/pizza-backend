@@ -27,7 +27,7 @@ On postman you can test:
 ### Links
 
 - [Demo](https://pizza-katarzynachmielecka.vercel.app/)
-- [Frontend part](https://github.com/KatarzynaChmielecka/pizza-backend)
+- [Frontend part](https://github.com/KatarzynaChmielecka/pizza)
 
 
 ## Process
